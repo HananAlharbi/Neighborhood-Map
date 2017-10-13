@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+    <meta charset="utf-8">
+    <title>Neighborhood | Google Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--include bootstarp framework-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--include custom file -->
+    <link rel="stylesheet" href="css/style.css">
+    <!--call API to include map in page using this key 'AIzaSyAoJxm5EFMhMP8uhv0AdXgz3K0iCaX2lhI'-->
+
+</head>
+
+
+<body>
+    <div class="container-fluid">
+        <!-- My site here -->
+        <h2>Neighborhood Map: Ghirnatah </h2>
+        <!-- after call API the result will load in map-canvas as image of map -->
+        <div class="row">
+            <div class="col-md-12">
+                <div id="map-canvas"></div>
+            </div>
+        </div>
+        <!-- Search form -->
+        <div class="row">
+            <div class="col-md-2 search-form">
+                <!-- when user enter text in search field will bind data between model and contral using attr 'data-bind' to call filter using this text -->
+                <input class="search search-form" type="text" placeholder="Filter Location" data-bind="textInput: filter">
+                <!-- here inject data in dom using bind attr and use foreach to loop on all elements in filteredArray array and repeat li with bind name -->
+                <!-- ko if: filteredArray().length <= 0-->
+                <ul class="list-view">
+                    <!-- here with bind data . the click event to focus on point that have same name-->
+                    <li>data not available</li>
+                </ul>
+                <!-- /ko -->​
+                <!-- ko if: filteredArray().length > 0-->
+                <ul data-bind="foreach: filteredArray" class="list-view">
+                    <!-- here with bind data . the click event to focus on point that have same name-->
+                    <li data-bind="text: name, click: $root.clickHandler"></li>
+                </ul>
+                <!-- /ko -->​
+
+            </div>
+        </div>
+    </div>
+    <!--include knockout, bootstrap and  jquery frameworks  -->
+    <script src="js/knockout-3.3.0.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!--include custom file-->
+    <script src="js/script.js"></script>
+  
+    </script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8TEl-S7oIufePwstuOnIToy3ZtRPYmAI&callback=initMap"
+    async defer>
+
+   
+</body>
+
+</html>
