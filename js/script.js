@@ -5,8 +5,8 @@ function initMap() {
   "use strict";
   // set default map values
   var mapOptions = {
-  center: new google.maps.LatLng(30.060668, 31.219883), // the initial location of cairo on map lat and lng
-  zoom: 12, // the initial zoom to display area 
+  center: new google.maps.LatLng(24.782661, 46.629109), // the initial location of cairo on map lat and lng
+  zoom: 12, // the initial zoom
   mapTypeId: google.maps.MapTypeId.ROADMAP // type of map ROADMAP (normal, default 2D map)
   };
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions); // set default values to map that will load in map-canvas
@@ -19,24 +19,24 @@ function googleError() {
 //Knockout Model
 // List of my favorite places in cairo
 var Model = [{
-    "name": "Burger Factory", //the name of place
-    "latlng": [30.059875598754438, 31.221953590277508] //the location of place on map using lat and lng 
+    "name": "Starbucks", //the name of place 
+    "latlng": [24.783349, 46.729692] //the location of place on map using lat and lng 
   },
   {
-    "name": "Left Bank", //the name of place
-    "latlng": [30.073034918695033, 31.221981542482556] //the location of place on map using lat and lng
+    "name": "Jarir Bookstore", //the name of place 
+    "latlng": [24.766366, 46.755773] //the location of place on map using lat and lng
   },
   {
-    "name": "Pottery Cafe", //the name of place
-    "latlng": [30.064569817454906, 31.215708902077974] //the location of place on map using lat and lng
+    "name": "Imam Saud University",
+    "latlng": [24.815595, 46.701577] //the location of place on map using lat and lng
   },
   {
-    "name": "The Coffee Bean & Tea Leaf", //the name of place
-    "latlng": [30.064377087896453, 31.215763092041016] //the location of place on map using lat and lng
+    "name": "King fahad bookstore", 
+    "latlng": [24.685901, 46.686450] //the location of place on map using lat and lng
   },
   {
-    "name": "Diwan Bookstore", //the name of place
-    "latlng": [30.05925140815715, 31.224002838134766] //the location of place on map using lat and lng
+    "name": "King Saud University", 
+    "latlng": [24.727570, 46.624580] //the location of place on map using lat and lng
   }
 ];
 
