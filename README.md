@@ -1,7 +1,6 @@
 # [Neighborbood Map Project](https://github.com/HananAlharbi/Neighborhood-Map)
 
 Neighborhood map project is developed for Front-End Nanodegree at Udacity.
-
 * This project is built using Google Maps API, Foursquare API and knockoutjs framework.
 * Features Include: 
   * A full-screen map to page using the Google Maps API.
@@ -20,7 +19,7 @@ Neighborhood map project is developed for Front-End Nanodegree at Udacity.
        var map, infoWindow;
        ```
   * using function intiMap that initMap Google map based on predefined Riyadh position
-  * define alist of places in cairo
+  * define alist of places in Riyadh
   * using Knockout ViewModel
     * define this scope ``` var ctrl = this; ```
     * define how array using observable 
