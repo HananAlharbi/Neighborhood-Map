@@ -1,11 +1,11 @@
 var ctrl = this;
 var map, infoWindow;
-// initMap Google map based on predefined cairo position
+// initMap Google map based on predefined Riyadh position
 function initMap() {
   "use strict";
   // set default map values
   var mapOptions = {
-  center: new google.maps.LatLng(24.782661, 46.629109), // the initial location of cairo on map lat and lng
+  center: new google.maps.LatLng(24.782661, 46.629109), // Riyadh lat and lng
   zoom: 12, // the initial zoom
   mapTypeId: google.maps.MapTypeId.ROADMAP // type of map ROADMAP (normal, default 2D map)
   };
@@ -17,14 +17,14 @@ function googleError() {
   alert("error");
 }
 //Knockout Model
-// List of my favorite places in cairo
+// List of my favorite places in Riyadh
 var Model = [{
     "name": "Starbucks", //the name of place 
     "latlng": [24.783349, 46.729692] //the location of place on map using lat and lng 
   },
   {
-    "name": "Jarir Bookstore", //the name of place 
-    "latlng": [24.766366, 46.755773] //the location of place on map using lat and lng
+    "name": "Jarir Bookstore", 
+    "latlng": [24.766366, 46.755773] 
   },
   {
     "name": "Imam Saud University",
