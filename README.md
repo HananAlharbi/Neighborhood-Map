@@ -1,6 +1,6 @@
 # [Neighborbood Map Project](https://github.com/HananAlharbi/Neighborhood-Map)
 
-Neighborhood map project is developed for Front-End Nanodegree at Udacity.
+
 * This project is built using Google Maps API, Foursquare API and knockoutjs framework.
 * Features Include: 
   * A full-screen map to page using the Google Maps API.
@@ -32,8 +32,5 @@ Neighborhood map project is developed for Front-End Nanodegree at Udacity.
     * call foursquare api using client_id and client_secret that created with application on foursquare.com
     * send http request using get method that return json
     * clickHandler on location list view
-    
-     
-    * set lat and lng on map using location to focus on it
-       
+  
        
