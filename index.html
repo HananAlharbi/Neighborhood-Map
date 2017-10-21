@@ -1,60 +1,57 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8">
-    <title>Neighborhood | Google Map</title>
+<html>
+ <head>
+ <!-- styles put here, but you can include a CSS file and reference it instead! -->
+ <meta charset="utf-8">
+    <title>Neighborhood Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--include bootstarp framework-->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!--include custom file -->
+    <!--include css file -->
     <link rel="stylesheet" href="css/style.css">
-    <!--call API to include map in page using this key 'AIzaSyB5CPqFomsWbNEHsXUUj6ItJRBJWFVdzWc'-->
+     <script src="js/script.js"></script>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> </link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/knockout-3.3.0.js"></script>
+    <script src="js/jquery.min.js"></script>
 
-</head>
+ </head>
+ <body>
+ <div class="container">
+      <div class="col-md-3">
+      <h2> Nieghborhood Map in Riyadh City: Ghirnatah</h2>
+      </div>
 
+<div class="navbar ">
+  <div class="navbar-header">     
+  </div>
 
-<body>
-    <div class="container-fluid">
-        <!-- My site here -->
-        <h2>Neighborhood Map: Riyadh </h2>
-        <!-- after call API the result will load in map-canvas as image of map -->
-        <div class="row">
-            <div class="col-md-12">
-                <div id="map-canvas"></div>
-            </div>
-        </div>
-        <!-- Search form -->
-        <div class="row">
-            <div class="col-md-2 search-form">
-                <!-- when user enter text in search field will bind data between model and contral using attr 'data-bind' to call filter using this text -->
-                <input class="search search-form" type="text" placeholder="Filter Location" data-bind="textInput: filter">
-                <!-- here inject data in dom using bind attr and use foreach to loop on all elements in filteredArray array and repeat li with bind name -->
-                
-                <ul class="list-view">
-                    <!-- here with bind data . the click event to focus on point that have same name-->
-                    <li>data not available</li>
-                </ul>
-                <!-- /ko -->​
-                <!-- ko if: filteredArray().length > 0-->
-                <ul data-bind="foreach: filteredArray" class="list-view">
-                    <!-- here with bind data . the click event to focus on point that have same name-->
-                    <li data-bind="text: name, click: $root.clickHandler"></li>
-                </ul>
-                <!-- /ko -->​
-
+      <div class="row">
+         <div class="col-md-6">
+               
+           <input class="search text-box" type="text" placeholder="search here" data-bind="textInput: filter">
+               
+<!--
+      <button type="button" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+      </button>
+      <ul class="dropdown-menu list-group list-view">
+        <li class="list-group-item"><a href="#">HTML</a></li>
+        <li class="list-group-item"><a href="#">CSS</a></li>
+        <li class="list-group-item"><a href="#">JavaScript</a></li>
+      </ul>
+-->
             </div>
         </div>
     </div>
-    <!--include knockout, bootstrap and  jquery frameworks  -->
-    <script src="js/knockout-3.3.0.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!--include custom file-->
-    <script src="js/script.js"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5CPqFomsWbNEHsXUUj6ItJRBJWFVdzWc&amp;v=3&amp;callback=initMap" onerror="googleError()">
-    </script>
-   
-</body>
+   <div id="map"></div>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8TEl-S7oIufePwstuOnIToy3ZtRPYmAI&callback=initMap"
+      async defer></script>
+  //  </script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8TEl-S7oIufePwstuOnIToy3ZtRPYmAI&callback=initMap"
+  //     async defer>
+
+
+ </body>
 </html>
