@@ -311,3 +311,17 @@ text-align: center;
 padding: 10px 2px 17px 0px;
 color: #ffffff;
 }
+
+
+@media only screen and (max-width:900px) {
+  #map {
+     height: 83%;
+     width: 83%
+  }
+
+#page-content-wrapper {
+width: 50%;
+}
+}
+
+
