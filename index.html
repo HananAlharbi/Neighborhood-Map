@@ -1,4 +1,5 @@
 
+
 <html>
  <head>
  <!-- styles put here, but you can include a CSS file and reference it instead! -->
@@ -6,52 +7,64 @@
     <title>Neighborhood Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--include bootstarp framework-->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+
     <!--include css file -->
     <link rel="stylesheet" href="css/style.css">
-     <script src="js/script.js"></script>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> </link>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/knockout-3.3.0.js"></script>
-    <script src="js/jquery.min.js"></script>
+
 
  </head>
  <body>
- <div class="container">
-      <div class="col-md-3">
-      <h2> Nieghborhood Map in Riyadh City: Ghirnatah</h2>
-      </div>
+   <div id="wrapper">
 
-<div class="navbar ">
-  <div class="navbar-header">     
-  </div>
 
-      <div class="row">
-         <div class="col-md-6">
-               
-           <input class="search text-box" type="text" placeholder="search here" data-bind="textInput: filter">
-               
-<!--
-      <button type="button" data-toggle="dropdown">
-        <span class="glyphicon glyphicon-menu-hamburger"></span>
-      </button>
-      <ul class="dropdown-menu list-group list-view">
-        <li class="list-group-item"><a href="#">HTML</a></li>
-        <li class="list-group-item"><a href="#">CSS</a></li>
-        <li class="list-group-item"><a href="#">JavaScript</a></li>
-      </ul>
--->
-            </div>
-        </div>
-    </div>
-   <div id="map"></div>
+       <!-- Sidebar -->
+       <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+           <ul class="nav sidebar-nav locations-view">
+               <li class="sidebar-brand">
+                   <a href="#">
+                      Neighborhood Map
+                   </a>
+               </li>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8TEl-S7oIufePwstuOnIToy3ZtRPYmAI&callback=initMap"
-      async defer></script>
-  //  </script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8TEl-S7oIufePwstuOnIToy3ZtRPYmAI&callback=initMap"
-  //     async defer>
+               <li class="SearchBar">
+
+                    <div class='beh'>
+                    <input id='keyword' type="text" name='search' autocomplete="off" placeholder="Search">
+                    <a id='filter'>Filter</a>
+                  </div>
+
+               </li>
+
+
+           </ul>
+       </nav>
+       <!-- /#sidebar-wrapper -->
+
+       <!-- Page Content -->
+       <div id="page-content-wrapper">
+           <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+               <span class="hamb-top"></span>
+         <span class="hamb-middle"></span>
+       <span class="hamb-bottom"></span>
+           </button>
+
+       </div>
+       <!-- /#page-content-wrapper -->
+
+   </div>
+   <!-- /#wrapper -->
+
+<div id='map'></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8TEl-S7oIufePwstuOnIToy3ZtRPYmAI&callback=initMap" async defer></script>
+<script src="js/jquery.min.js"></script>
+
+
+<script src="js/script.js"></script>
+
+
 
 
  </body>
 </html>
+
