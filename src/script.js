@@ -7,6 +7,12 @@ var map, infoWindow;
 
      }
  );
+
+//Error handling
+function googleError() {
+  alert("There is error");
+}
+
       var locations = [
        {title:'Starbucks' ,location: {lat: 24.783349, lng: 46.729692}},
        {title:'Imam Muhammed University' ,location: {lat: 24.815595, lng: 46.701577}},
@@ -17,11 +23,6 @@ var map, infoWindow;
 
      var markers =[];
      var marker;
-
-
-
-
-
 
      infowindow = new google.maps.InfoWindow();
 
@@ -55,9 +56,11 @@ var map, infoWindow;
           marker.addListener('click',function() {
 
           populateInfoWindow(this,infowindow);
+
+
+
      // infowindow.open(map ,marker);
                      });
-
 
 // Add locations in List view
  $(".locations-view").append(' <li data-markid='+i+' class="location"><a href="#">'+ locations[i].title +'</a></li>');
@@ -69,61 +72,118 @@ var map, infoWindow;
 
    google.maps.event.trigger(markers[markid], 'click');
 
-
-
-
  });
+
+
+var apiURL = 'https://api.foursquare.com/v2/venues/';
+var foursquareClientID = 'PQOPXJJPRCHKLA12RPQI4GI4BIWCLNEUDZWH04QIVBX32EXR'
+var foursquareSecret ='K0GHTGPKFD35BIDNSQLJYGPMGEVPCDS3DOZXBVMMZJPNO5QO';
+var foursquareVersion = '20170115';
+var venueFoursquareID = "4b4aac62f964a520a98c26e3";
+
+var foursquareURL = apiURL + venueFoursquareID + '?client_id=' + foursquareClientID +  '&client_secret=' + foursquareSecret +'&v=' + foursquareVersion;
+
+$.ajax({
+  url: foursquareURL,
+  success: function(data) {
+    console.log(data);
+  }
+});
+
+
+
+
+
+function loadingData (){
+  for (var i =0 ; i <locations.length; i++){
+    var lat = locations[i].location.lat;
+    var lng = locations[i].location.lng;
+    var title = locations[i].title;
+    mymodel.Knockout.push(new Knockout(title, lat, lng));
+  }
+}
+
+
+  function Knockout (title, lat, lng){
+    this.title = ko.observabl(title);
+    this.lat = ko.observabl(lat);
+    this.lng = ko.observabl(lng);
+    this.click = function (data, event){
+      var target;
+      if (event.target)
+       target = event.target;
+      else
+        if (event.srcElement)
+          target = event.srcElement;
+
+        for( var i=0; i < locations.length; i++){
+          if (locations[i].title == title){
+            var infowindow = new google.maps.Infowindow();
+            var lat = locations[i].location.lat;
+            var lng = locationsp[i].location.lng;
+          }
+        }
+
+    }
+  }
+
+ var mymodel = new model();
+//$(document).ready(function(){
+  //loadingData();
+  //ko.applyBindings(mymodel);
+//});
+
 
 //Search function
 
- function search(keyword,SuccessCallBack,ErrorCallBack){
+ //function search(keyword,SuccessCallBack,ErrorCallBack){
 
 
-    var id , result , status;
+   // var id , result , status;
 
-   for(i=0;i<locations.length;i++){
+  // for(i=0;i<locations.length;i++){
 
-      result = locations[i].title.search(keyword);
+     // result = locations[i].title.search(keyword);
 
-     if(result >= 0){
+    // if(result >= 0){
 
-       status = true;
+   //    status = true;
 
-       break;
-     }
-     else{
-      status = false;
-     }
-   }
+    //   break;
+    // }
+    // else{
+    //  status = false;
+   //  }
+   //}
 
-   if(status == true){
-      SuccessCallBack(i);
-   }
-   else{
-     ErrorCallBack(i);
-   }
+  // if(status == true){
+  //    SuccessCallBack(i);
+   //}
+  // else{
+   //  ErrorCallBack(i);
+  // }
    //return id;
- }
+ //}
 
 
- $("#filter").click(function(){
-   var text = $("#keyword").val();
+ //$("#filter").click(function(){
+  // var text = $("#keyword").val();
+//
+    //if(text == ''){
+    //alert("Please Inter Keyword");
+    // return;
+    //}
 
-    if(text == ''){
-      alert("Please Inter Keyword");
-      return;
-    }
+   //search(text,function(i){
 
-   search(text,function(i){
-
-    google.maps.event.trigger(markers[i], 'click');
+   // google.maps.event.trigger(markers[i], 'click');
       //console.log(markers[i]);
 
-   },function(){
-     alert("Not found");
-   });
+  // },function(){
+   //  alert("Not found");
+   //});
 
- });
+// });
 
 //Show Information about location
 
@@ -134,7 +194,9 @@ if (infowindow.marker !=marker){
   infowindow.open(map , marker);
   marker.addListener('closeclick',function(){
   infowindow.setMarker(null);
-// infowindow.open(map ,marker);
+//infowindow.open(map ,marker);
+
+
 
 
  });
@@ -143,9 +205,9 @@ if (infowindow.marker !=marker){
 
 
 
-//window.onload = function googleError() {
-  //  document.getElementById('map').innerHTML = "Error in Map!";
-//};
+window.onload = function googleError() {
+  document.getElementById('map').innerHTML = "Error in Map!";
+};
 
 
 //Add animation when user click markrs
@@ -168,9 +230,6 @@ if (infowindow.marker !=marker){
            */
         //}
       }
-
-
-
 
 }
 
@@ -211,7 +270,4 @@ $(document).ready(function () {
 
 });
 
-//Error handling
-function googleError() {
-  alert("There is error");
-}
+
