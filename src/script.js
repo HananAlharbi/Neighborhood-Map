@@ -94,12 +94,14 @@ $.ajax({
 
 
 
-function loadingData (){
+function loadingArray (){
+  var loc = {};
   for (var i =0 ; i <locations.length; i++){
     var lat = locations[i].location.lat;
     var lng = locations[i].location.lng;
     var title = locations[i].title;
     mymodel.Knockout.push(new Knockout(title, lat, lng));
+    loc.isVisible = ko.observable(true);
   }
 }
 
@@ -128,10 +130,10 @@ function loadingData (){
   }
 
  var mymodel = new model();
-//$(document).ready(function(){
-  //loadingData();
-  //ko.applyBindings(mymodel);
-//});
+$(document).ready(function(){
+  loadingArray();
+  ko.applyBindings(mymodel);
+});
 
 
 //Search function
