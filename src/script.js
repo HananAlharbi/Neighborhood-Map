@@ -1,4 +1,4 @@
-
+var map, infowwindow;
        function initMap() {
          var map = new google.maps.Map(document.getElementById('map'), {
            center: new google.maps.LatLng(24.782661, 46.629109),
