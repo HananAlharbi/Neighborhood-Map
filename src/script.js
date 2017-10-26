@@ -73,7 +73,7 @@ var map, infoWindow;
  });
 
 //Search
-/*
+
  function search(keyword,SuccessCallBack,ErrorCallBack){
 
 
@@ -123,7 +123,6 @@ var map, infoWindow;
 
  });
 
-*/
 
   function populateInfoWindow (marker,infowindow ){
 
@@ -137,9 +136,9 @@ var map, infoWindow;
             dataType: "jsonp"
             //jsnop datatype
         }).done(function(response) {
-         // clearTimeout(wikiTimeout);
+        
             //response from wikipedia api
-            articleUrl = response[3][0];
+            URL = response[3][0];
             //getpanorama function is invoked
 
             streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
@@ -164,7 +163,7 @@ var map, infoWindow;
       var fenway = data.location.latLng;
       var heading = google.maps.geometry.spherical.computeHeading(
       fenway, marker.position);
-      infowindow.setContent('<div>' + marker.title + '</div><br><a href ="' + articleUrl + '">' + articleUrl + '</a><hr><div id="pano"></div>');
+      infowindow.setContent('<div>' + marker.title + '</div><br><a href ="' + URL + '">' + URL + '</a><hr><div id="pano"></div>');
       var panoramaOptions = {
 
       position: fenway,
@@ -183,7 +182,7 @@ var map, infoWindow;
     infowindow.setContent('<div>' + marker.title + '</div>' +'<div>Street View data not found for this location</div>' );
      }
 
-   
+   //open infowindow on that marker
     infowindow.open(map, marker);
     }
   }
@@ -208,6 +207,8 @@ var map, infoWindow;
            */
         //}
       }
+
+
 
 
 }
