@@ -1,4 +1,4 @@
-var map, infoWindow;
+
        function initMap() {
          var map = new google.maps.Map(document.getElementById('map'), {
            center: new google.maps.LatLng(24.782661, 46.629109),
@@ -27,7 +27,8 @@ var map, infoWindow;
     var bounds = new google.maps.LatLngBounds();
 
       // for (i ; i<locations.length ; i++)
-      for (i = 0; i < locations.length; i++)
+      
+    for (i = 0; i < locations.length; i++)
       {
         var position = locations[i].location;
           var title = locations[i].title;
@@ -59,7 +60,7 @@ var map, infoWindow;
     // Add locations in List view
     $(".locations-view").append(' <li data-markid='+i+' class="location"><a href="#">'+ locations[i].title +'</a></li>');
   }
-  
+
 
  $(".locations-view .location").click(function(){
 
@@ -76,7 +77,7 @@ var map, infoWindow;
 
  function search(keyword,SuccessCallBack,ErrorCallBack){
 
-    var id , result , status;
+    var  result , status;
    for(i=0;i<locations.length;i++){
       result = locations[i].title.search(keyword);
 
@@ -124,17 +125,20 @@ var map, infoWindow;
 
   function populateInfoWindow (marker,infowindow ){
 
-    var linkAPI, wikiPURL;
-
+  var wikiURL;
   var streetViewService = new google.maps.StreetViewService();
-    wikiPURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&format=json&callback=wikiCallback';
+  wikiURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&format=json&callback=wikiCallback';
+  var wikiRequestTimeOut = setTimeout(function(){
+   // $wikiElem.text("faild no get wikipedia resources");
+  }, 8000);
+
   //ajax request
   $.ajax({
-            url: wikiPURL,
+            url: wikiURL,
             dataType: "jsonp"
             //jsnop datatype
         }).done(function(response) {
-        
+             clearTimeout(wikiRequestTimeOut);
             //response from wikipedia api
             URL = response[3][0];
             //getpanorama function is invoked
