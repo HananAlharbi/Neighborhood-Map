@@ -49,12 +49,12 @@
           markers.push(marker);
 
           bounds.extend(marker.position);
+marker.addListener('click', openInfoWindow);
+         // marker.addListener('click',function() {
 
-          marker.addListener('click',function() {
-
-          populateInfoWindow(this,infowindow);
+         // populateInfoWindow(this,infowindow);
      // infowindow.open(map ,marker);
-                     });
+                //     });
 
 
     // Add locations in List view
@@ -70,7 +70,9 @@
 
  });
 
-
+function openInfoWindow() {
+  populateInfoWindow(this,infowindow);
+}
 
 
 //Search
