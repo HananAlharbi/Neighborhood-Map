@@ -45,7 +45,6 @@ var map, infoWindow;
 //when clicked on marker show information
            marker.addListener('click', toggleBounce);
 
-
           markers.push(marker);
 
           bounds.extend(marker.position);
@@ -57,9 +56,10 @@ var map, infoWindow;
                      });
 
 
-                     // Add locations in List view
-                     $(".locations-view").append(' <li data-markid='+i+' class="location"><a href="#">'+ locations[i].title +'</a></li>');
+    // Add locations in List view
+    $(".locations-view").append(' <li data-markid='+i+' class="location"><a href="#">'+ locations[i].title +'</a></li>');
   }
+  
 
  $(".locations-view .location").click(function(){
 
@@ -67,20 +67,17 @@ var map, infoWindow;
 
    google.maps.event.trigger(markers[markid], 'click');
 
-
-
-
  });
+
+
+
 
 //Search
 
  function search(keyword,SuccessCallBack,ErrorCallBack){
 
-
     var id , result , status;
-
    for(i=0;i<locations.length;i++){
-
       result = locations[i].title.search(keyword);
 
      if(result >= 0){
@@ -94,7 +91,7 @@ var map, infoWindow;
      }
    }
 
-   if(status == true){
+   if(status === true){
       SuccessCallBack(i);
    }
    else{
@@ -107,7 +104,7 @@ var map, infoWindow;
  $("#filter").click(function(){
    var text = $("#keyword").val();
 
-    if(text == ''){
+    if(text === ''){
       alert("Please Inter Keyword");
       return;
     }
@@ -122,6 +119,7 @@ var map, infoWindow;
    });
 
  });
+
 
 
   function populateInfoWindow (marker,infowindow ){
@@ -155,10 +153,11 @@ var map, infoWindow;
 // infowindow.open(map ,marker);
 
 });
-
-  var radius = 50;
-  function getStreetView(data, status){
+ var radius = 50;
+  
+var getStreetView = function (data, status){
     if (status == google.maps.StreetViewStatus.OK){
+     
 
       var fenway = data.location.latLng;
       var heading = google.maps.geometry.spherical.computeHeading(
@@ -184,7 +183,7 @@ var map, infoWindow;
 
    //open infowindow on that marker
     infowindow.open(map, marker);
-    }
+    };
   }
  }
 
@@ -225,7 +224,7 @@ $(document).ready(function () {
 
     function hamburger_cross() {
 
-      if (isClosed == true) {
+      if (isClosed === true) {
         overlay.hide();
         trigger.removeClass('is-open');
         trigger.addClass('is-closed');
