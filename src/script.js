@@ -7,12 +7,6 @@ var map, infoWindow;
 
      }
  );
-
-//Error handling
-function googleError() {
-  alert("There is error");
-}
-
       var locations = [
        {title:'Starbucks' ,location: {lat: 24.783349, lng: 46.729692}},
        {title:'Imam Muhammed University' ,location: {lat: 24.815595, lng: 46.701577}},
@@ -24,9 +18,12 @@ function googleError() {
      var markers =[];
      var marker;
 
+
+
+
+
+// Createing Infowindow
      infowindow = new google.maps.InfoWindow();
-
-
     var bounds = new google.maps.LatLngBounds();
 
       // for (i ; i<locations.length ; i++)
@@ -35,7 +32,7 @@ function googleError() {
         var position = locations[i].location;
           var title = locations[i].title;
 
-
+// create marker
            marker = new google.maps.Marker({
                   map: map ,
                   draggable: true,
@@ -45,7 +42,7 @@ function googleError() {
 
                   id:i
                 });
-
+//when clicked on marker show information
            marker.addListener('click', toggleBounce);
 
 
@@ -56,14 +53,12 @@ function googleError() {
           marker.addListener('click',function() {
 
           populateInfoWindow(this,infowindow);
-
-
-
      // infowindow.open(map ,marker);
                      });
 
-// Add locations in List view
- $(".locations-view").append(' <li data-markid='+i+' class="location"><a href="#">'+ locations[i].title +'</a></li>');
+
+                     // Add locations in List view
+                     $(".locations-view").append(' <li data-markid='+i+' class="location"><a href="#">'+ locations[i].title +'</a></li>');
   }
 
  $(".locations-view .location").click(function(){
@@ -72,145 +67,128 @@ function googleError() {
 
    google.maps.event.trigger(markers[markid], 'click');
 
+
+
+
  });
 
-
-var apiURL = 'https://api.foursquare.com/v2/venues/';
-var foursquareClientID = 'PQOPXJJPRCHKLA12RPQI4GI4BIWCLNEUDZWH04QIVBX32EXR'
-var foursquareSecret ='K0GHTGPKFD35BIDNSQLJYGPMGEVPCDS3DOZXBVMMZJPNO5QO';
-var foursquareVersion = '20170115';
-var venueFoursquareID = "4b4aac62f964a520a98c26e3";
-
-var foursquareURL = apiURL + venueFoursquareID + '?client_id=' + foursquareClientID +  '&client_secret=' + foursquareSecret +'&v=' + foursquareVersion;
-
-$.ajax({
-  url: foursquareURL,
-  success: function(data) {
-    console.log(data);
-  }
-});
-
-
-
-
+//Search
 /*
-function loadingData (){
-  for (var i =0 ; i <locations.length; i++){
-    var lat = locations[i].location.lat;
-    var lng = locations[i].location.lng;
-    var title = locations[i].title;
-    mymodel.Knockout.push(new Knockout(title, lat, lng));
-  }
-}
+ function search(keyword,SuccessCallBack,ErrorCallBack){
 
 
-  function Knockout (title, lat, lng){
-    this.title = ko.observabl(title);
-    this.lat = ko.observabl(lat);
-    this.lng = ko.observabl(lng);
-    this.click = function (data, event){
-      var target;
-      if (event.target)
-       target = event.target;
-      else
-        if (event.srcElement)
-          target = event.srcElement;
+    var id , result , status;
 
-        for( var i=0; i < locations.length; i++){
-          if (locations[i].title == title){
-            var infowindow = new google.maps.Infowindow();
-            var lat = locations[i].location.lat;
-            var lng = locationsp[i].location.lng;
-          }
-        }
+   for(i=0;i<locations.length;i++){
 
-    }
-  }
-*/
- var mymodel = new model();
-//$(document).ready(function(){
-  //loadingData();
-  //ko.applyBindings(mymodel);
-//});
+      result = locations[i].title.search(keyword);
 
+     if(result >= 0){
 
-//Search function
+       status = true;
 
- //function search(keyword,SuccessCallBack,ErrorCallBack){
+       break;
+     }
+     else{
+      status = false;
+     }
+   }
 
-
-   // var id , result , status;
-
-  // for(i=0;i<locations.length;i++){
-
-     // result = locations[i].title.search(keyword);
-
-    // if(result >= 0){
-
-   //    status = true;
-
-    //   break;
-    // }
-    // else{
-    //  status = false;
-   //  }
-   //}
-
-  // if(status == true){
-  //    SuccessCallBack(i);
-   //}
-  // else{
-   //  ErrorCallBack(i);
-  // }
+   if(status == true){
+      SuccessCallBack(i);
+   }
+   else{
+     ErrorCallBack(i);
+   }
    //return id;
- //}
+ }
 
 
- //$("#filter").click(function(){
-  // var text = $("#keyword").val();
-//
-    //if(text == ''){
-    //alert("Please Inter Keyword");
-    // return;
-    //}
+ $("#filter").click(function(){
+   var text = $("#keyword").val();
 
-   //search(text,function(i){
+    if(text == ''){
+      alert("Please Inter Keyword");
+      return;
+    }
 
-   // google.maps.event.trigger(markers[i], 'click');
+   search(text,function(i){
+
+    google.maps.event.trigger(markers[i], 'click');
       //console.log(markers[i]);
 
-  // },function(){
-   //  alert("Not found");
-   //});
-
-// });
-
-//Show Information about location
-
-  function populateInfoWindow (marker,infowindow ){
-if (infowindow.marker !=marker){
-  infowindow.marker = marker;
-  infowindow.setContent('<div>' + marker.title + '</div>');
-  infowindow.open(map , marker);
-  marker.addListener('closeclick',function(){
-  infowindow.setMarker(null);
-//infowindow.open(map ,marker);
-
-
-
+   },function(){
+     alert("Not found");
+   });
 
  });
+
+*/
+
+  function populateInfoWindow (marker,infowindow ){
+
+    var linkAPI, wikiPURL;
+
+  var streetViewService = new google.maps.StreetViewService();
+    wikiPURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&format=json&callback=wikiCallback';
+  //ajax request
+  $.ajax({
+            url: wikiPURL,
+            dataType: "jsonp"
+            //jsnop datatype
+        }).done(function(response) {
+         // clearTimeout(wikiTimeout);
+            //response from wikipedia api
+            articleUrl = response[3][0];
+            //getpanorama function is invoked
+
+            streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
+
+        });
+
+  if (infowindow.marker !=marker){
+  infowindow.marker = marker;
+  infowindow.setContent('<div>' + marker.title + '</div>');
+ // infowindow.open(map , marker);
+
+  marker.addListener('closeclick',function(){
+  infowindow.setMarker(null);
+// infowindow.open(map ,marker);
+
+});
+
+  var radius = 50;
+  function getStreetView(data, status){
+    if (status == google.maps.StreetViewStatus.OK){
+
+      var fenway = data.location.latLng;
+      var heading = google.maps.geometry.spherical.computeHeading(
+      fenway, marker.position);
+      infowindow.setContent('<div>' + marker.title + '</div><br><a href ="' + articleUrl + '">' + articleUrl + '</a><hr><div id="pano"></div>');
+      var panoramaOptions = {
+
+      position: fenway,
+      pov: {
+        heading: heading,
+         pitch: 10,
+
+        }
+        //panorama.setVisible(true);
+      };
+       
+       var panorama = new google.maps.StreetViewPanorama(
+       document.getElementById('pano'), panoramaOptions);
+       } else {
+        
+    infowindow.setContent('<div>' + marker.title + '</div>' +'<div>Street View data not found for this location</div>' );
+     }
+
+   
+    infowindow.open(map, marker);
+    }
+  }
  }
-}
 
-
-
-window.onload = function googleError() {
-  document.getElementById('map').innerHTML = "Error in Map!";
-};
-
-
-//Add animation when user click markrs
       function toggleBounce() {
 
         for(i=0;i<markers.length;i++){
@@ -231,6 +209,7 @@ window.onload = function googleError() {
         //}
       }
 
+
 }
 
 
@@ -243,7 +222,6 @@ $(document).ready(function () {
       hamburger_cross();
     });
 
-// Cross slide bar
     function hamburger_cross() {
 
       if (isClosed == true) {
@@ -269,5 +247,3 @@ $(document).ready(function () {
   },200);
 
 });
-
-
