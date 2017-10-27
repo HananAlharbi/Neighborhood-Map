@@ -142,7 +142,7 @@ function openInfoWindow() {
         }).done(function(response) {
              clearTimeout(wikiRequestTimeOut);
             //response from wikipedia api
-            var URL = response[3][0];
+            URL = response[3][0];
             //getpanorama function is invoked
 
             streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
