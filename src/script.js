@@ -9,10 +9,11 @@ var map, infowwindow;
  );
       var locations = [
        {title:'Starbucks' ,location: {lat: 24.783349, lng: 46.729692}},
-       {title:'Imam Muhammed University' ,location: {lat: 24.815595, lng: 46.701577}},
-       {title:'Jarir Store' ,location: {lat: 24.766366, lng: 46.755773}},
-       {title:'King Fahad BookStore' ,location: {lat: 24.685901, lng: 46.686450}},
-       {title:'King Saud University'  ,location: {lat: 24.727570, lng: 46.624580}}
+       {title:'Shake Shack' ,location: {lat: 24.704123, lng:46.693148}},
+       {title:'Urth Cafe' ,location: {lat: 24.705812, lng:  46.705732}},
+       {title:'KFC' ,location: {lat: 24.746059, lng: 46.619722}},
+       {title:'Carter'  ,location: {lat: 24.743673, lng: 46.658264}},
+       {title:'Five Guys'  ,location: {lat: 24.713786, lng: 46.675296}}
      ];
 
      var markers =[];
