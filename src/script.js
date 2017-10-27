@@ -57,11 +57,9 @@ marker.addListener('click', openInfoWindow);
      // infowindow.open(map ,marker);
                 //     });
 
-
     // Add locations in List view
     $(".locations-view").append(' <li data-markid='+i+' class="location"><a href="#">'+ locations[i].title +'</a></li>');
   }
-
 
  $(".locations-view .location").click(function(){
 
@@ -77,6 +75,7 @@ function openInfoWindow() {
 
 
 //Search
+/*
 
  function search(keyword,SuccessCallBack,ErrorCallBack){
 
@@ -124,6 +123,8 @@ function openInfoWindow() {
 
  });
 
+*/
+
 
 
   function populateInfoWindow (marker,infowindow ){
@@ -162,7 +163,7 @@ function openInfoWindow() {
 });
  var radius = 50;
   
-var getStreetView = function (data, status){
+    var getStreetView = function (data, status){
     if (status == google.maps.StreetViewStatus.OK){
      
 
