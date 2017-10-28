@@ -249,7 +249,7 @@ function populateInfoWindow(marker, infowindow, lan, lng) {
 populateInfoWindow = function (marker,infowindow) {
         var wikiURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title +'&format=json&callback=wikiCallback';
         var wikiRequestTimeout = setTimeout(function(){
-          alert("failed to get wikipedia resources")
+          alert("failed to get wikipedia resources");
         }, 8000);
         var articleStr;
         var contentString = '<h3>' + marker.title + '</h3>' + '<img src="' + marker.image + '" height=\"100px\" width=\"200px\">' + '<br>';
@@ -264,7 +264,7 @@ populateInfoWindow = function (marker,infowindow) {
               articleStr = articleList[i];
               var url = 'http://en.wikipedia.org/wiki/' + articleStr;
               contentString = contentString + '<a href=\"' + url + '\">' + url + '</a>' + '<br>';
-            };
+            }
             //clearTimeout(wikiRequestTimeout);
           }
         });
@@ -282,7 +282,7 @@ populateInfoWindow = function (marker,infowindow) {
           infowindow.setMarker = null;
               });
           }
-      }
+      };
       
    
 
