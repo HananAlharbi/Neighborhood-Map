@@ -194,8 +194,8 @@ $(document).ready(function () {
 */
 
 //My forSq API
-/*
-function populateInfoWindow(marker, infowindow, lan, lng) {
+
+function populateInfoWindow(marker, infowindow) {
 
         if (infowindow.marker != marker) {
             infowindow.marker = marker;
@@ -204,7 +204,7 @@ function populateInfoWindow(marker, infowindow, lan, lng) {
             var foursquareClientID = 'PQOPXJJPRCHKLA12RPQI4GI4BIWCLNEUDZWH04QIVBX32EXR';
             var foursquareSecret = 'K0GHTGPKFD35BIDNSQLJYGPMGEVPCDS3DOZXBVMMZJPNO5QO';
             var venueFoursquareID = "20161016";
-            var foursquareURL = apiURL + 'search?v=' + venueFoursquareID + '&ll=' + lan + ',' + lng + '&intent=checkin&' + 'client_id=' + foursquareClientID + '&client_secret=' + foursquareSecret;
+            var foursquareURL = apiURL + 'search?v=' + venueFoursquareID + '&ll=' + position.lat + ',' + position.lng + '&intent=checkin&' + 'client_id=' + foursquareClientID + '&client_secret=' + foursquareSecret;
             console.log(foursquareURL);
             $.ajax({
                 url: foursquareURL,
@@ -241,15 +241,15 @@ function populateInfoWindow(marker, infowindow, lan, lng) {
     } //populateInfoWindow
 
 
-*/
 
 
 
+/*
 
 populateInfoWindow = function (marker,infowindow) {
         var wikiURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title +'&format=json&callback=wikiCallback';
         var wikiRequestTimeout = setTimeout(function(){
-          alert("failed to get wikipedia resources");
+          alert("failed to get wikipedia resources")
         }, 8000);
         var articleStr;
         var contentString = '<h3>' + marker.title + '</h3>' + '<img src="' + marker.image + '" height=\"100px\" width=\"200px\">' + '<br>';
@@ -264,7 +264,7 @@ populateInfoWindow = function (marker,infowindow) {
               articleStr = articleList[i];
               var url = 'http://en.wikipedia.org/wiki/' + articleStr;
               contentString = contentString + '<a href=\"' + url + '\">' + url + '</a>' + '<br>';
-            }
+            };
             //clearTimeout(wikiRequestTimeout);
           }
         });
@@ -282,9 +282,9 @@ populateInfoWindow = function (marker,infowindow) {
           infowindow.setMarker = null;
               });
           }
-      };
+      }
       
-   
+   */
 
 
    function toggleBounce() {
