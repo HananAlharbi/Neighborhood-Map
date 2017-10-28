@@ -17,12 +17,12 @@ var map, infowwindow;
          
 
       var locations = [
-       {title:'Starbucks' ,location: {lat: 24.783349, lng: 46.729692}},
-       {title:'Shake Shack' ,location: {lat: 24.704123, lng:46.693148}},
-       {title:'Urth Cafe' ,location: {lat: 24.705812, lng:  46.705732}},
-       {title:'KFC' ,location: {lat: 24.746059, lng: 46.619722}},
-       {title:'Carter'  ,location: {lat: 24.743673, lng: 46.658264}},
-       {title:'Five Guys'  ,location: {lat: 24.713786, lng: 46.675296}}
+       {title:'Starbucks' ,location: {lat:24.783349,lng:46.729692}},
+       {title:'Shake Shack' ,location: {lat:24.704123,lng:46.693148}},
+       {title:'Urth Cafe' ,location: {lat:24.705812,lng:46.705732}},
+       {title:'KFC' ,location: {lat:24.746059,lng:46.619722}},
+       {title:'Carter'  ,location: {lat:24.743673,lng:46.658264}},
+       {title:'Five Guys'  ,location: {lat:24.713786,lng:46.675296}}
      ];
 
      var markers =[];
@@ -38,6 +38,8 @@ var map, infowwindow;
     for (i = 0; i < locations.length; i++)
       {
         var position = locations[i].location;
+        var lat   = locations[i].location.lat;
+        var lng   = locations[i].location.lng;
           var title = locations[i].title;
 
 // create marker
@@ -45,6 +47,8 @@ var map, infowwindow;
                   map: map ,
                   draggable: true,
                   position: position,
+                  lat:lat,
+                  lng:lng,
                   title:title,
                   animation:google.maps.Animation.DROP,
 
@@ -204,7 +208,7 @@ function populateInfoWindow(marker, infowindow) {
             var foursquareClientID = 'PQOPXJJPRCHKLA12RPQI4GI4BIWCLNEUDZWH04QIVBX32EXR';
             var foursquareSecret = 'K0GHTGPKFD35BIDNSQLJYGPMGEVPCDS3DOZXBVMMZJPNO5QO';
             var venueFoursquareID = "20161016";
-            var foursquareURL = apiURL + 'search?v=' + venueFoursquareID + '&ll=' + position.lat + ',' + position.lng + '&intent=checkin&' + 'client_id=' + foursquareClientID + '&client_secret=' + foursquareSecret;
+            var foursquareURL = apiURL + 'search?v=' + venueFoursquareID + '&ll='+marker.lat+','+marker.lng + '&intent=checkin&' + 'client_id=' + foursquareClientID + '&client_secret=' + foursquareSecret;
             console.log(foursquareURL);
             $.ajax({
                 url: foursquareURL,
