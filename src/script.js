@@ -6,7 +6,16 @@ var map, infowwindow;
             mapTypeId: google.maps.MapTypeId.ROADMAP
 
      }
+
+     
+     
  );
+  function googleError() {
+  alert("The Google Maps API has failed. Please try again.");
+}
+
+         
+
       var locations = [
        {title:'Starbucks' ,location: {lat: 24.783349, lng: 46.729692}},
        {title:'Shake Shack' ,location: {lat: 24.704123, lng:46.693148}},
@@ -18,9 +27,6 @@ var map, infowwindow;
 
      var markers =[];
      var marker;
-
-
-
 
 
 // Createing Infowindow
@@ -50,16 +56,18 @@ var map, infowwindow;
           markers.push(marker);
 
           bounds.extend(marker.position);
-marker.addListener('click', openInfoWindow);
+          marker.addListener('click', openInfoWindow);
          // marker.addListener('click',function() {
 
          // populateInfoWindow(this,infowindow);
      // infowindow.open(map ,marker);
                 //     });
 
+
     // Add locations in List view
     $(".locations-view").append(' <li data-markid='+i+' class="location"><a href="#">'+ locations[i].title +'</a></li>');
   }
+
 
  $(".locations-view .location").click(function(){
 
@@ -74,9 +82,70 @@ function openInfoWindow() {
 }
 
 
+
+
+
+function Filter(title, lat, lng) {
+    this.title = ko.observable(title);
+    this.lat = ko.observable(lat);
+    this.lng = ko.observable(lng);
+    this.clickMe = function(data, event){
+      var target;
+      if(event.target) target = event.target;
+      else if (event.srcElement)  target = event.srcElement;
+
+      for (var i = 0 ; i< locations.length; i++){
+        if (locations[i].title == title ){
+          var infowindow = new google.maps.Infowindow();
+          var lat = locations[i].location.lat;
+          var lng = locations[i].location.lng;
+          populateInfoWindow(locations[i].marker,infowindow,lat,lng);
+        }
+      }
+    };
+
+
+function model() {
+    var self = this;
+    self.Filter = ko.observableArray("");
+    self.query = ko.observable("");
+    self.filteredEmployees = ko.computed(function () {
+        var filter = self.query().toLowerCase();
+
+        if (!filter) {
+            return self.Filter();
+        } else {
+            return ko.utils.arrayFilter(self.Filter(), function (item) {
+                return item.firstName().toLowerCase().indexOf(filter) !== -1;
+            });
+        }
+    });
+}
+
+
+var mymodel = new model();
+
+
+
+function loaddata() {
+ for (var i =0 ; i<locations.length; i++){
+  var lat = locations[i].location.lat;
+  var lng = locations[i].location.lng;
+  var title = locations[i].location.title;
+  mymodel.Filter.push(new location(title,lat,lng));
+ }
+}
+
+
+$(document).ready(function () {
+    loaddata();
+    ko.applyBindings(mymodel);
+});
+
+
+}
 //Search
 /*
-
  function search(keyword,SuccessCallBack,ErrorCallBack){
 
     var  result , status;
@@ -122,80 +191,103 @@ function openInfoWindow() {
    });
 
  });
+*/
+
+//My forSq API
+/*
+function populateInfoWindow(marker, infowindow, lan, lng) {
+
+        if (infowindow.marker != marker) {
+            infowindow.marker = marker;
+            var phone, address, name;
+            var apiURL = 'https://api.foursquare.com/v2/venues/';
+            var foursquareClientID = 'PQOPXJJPRCHKLA12RPQI4GI4BIWCLNEUDZWH04QIVBX32EXR';
+            var foursquareSecret = 'K0GHTGPKFD35BIDNSQLJYGPMGEVPCDS3DOZXBVMMZJPNO5QO';
+            var venueFoursquareID = "20161016";
+            var foursquareURL = apiURL + 'search?v=' + venueFoursquareID + '&ll=' + lan + ',' + lng + '&intent=checkin&' + 'client_id=' + foursquareClientID + '&client_secret=' + foursquareSecret;
+            console.log(foursquareURL);
+            $.ajax({
+                url: foursquareURL,
+                success: function(data) {
+                    phone = data.response.venues[0].contact.phone;
+                    address = data.response.venues[0].location.address;
+                    name = data.response.venues[0].name;
+                    this.phone = ko.observable(phone);
+                    if (phone === "" || phone === null ||typeof phone == 'undefined') {
+                        phone = "Not avilable";
+                    }
+                    if (address === "" || address === null|| typeof address == 'undefined') {
+                        address = "Not avilable";
+                    }
+                    if (name === "" || name === null|| typeof name == 'undefined' ) {
+                        name = "Not avilable";
+                    }
+                    infowindow.setContent('<div>' + 'Name :' + name + '/' + marker.title + '<br>' + 'PHONE(#) :' + phone + ' Address : ' + address + '</div>');
+                    infowindow.open(map, marker);
+
+                    marker.addListener('closeclick', function() {
+                        // infowindow.open(map ,marker);
+
+                    });
+                },
+                error: function(error) {
+                    alert("location details are not available now , please try again.");
+                }
+            });
+
+        } //END IF
+
+
+    } //populateInfoWindow
+
 
 */
 
 
 
-  function populateInfoWindow (marker,infowindow ){
 
-  var wikiURL;
-  var streetViewService = new google.maps.StreetViewService();
-  wikiURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&format=json&callback=wikiCallback';
-  var wikiRequestTimeOut = setTimeout(function(){
-   // $wikiElem.text("faild no get wikipedia resources");
-  }, 8000);
+populateInfoWindow = function (marker,infowindow) {
+        var wikiURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title +'&format=json&callback=wikiCallback';
+        var wikiRequestTimeout = setTimeout(function(){
+          alert("failed to get wikipedia resources")
+        }, 8000);
+        var articleStr;
+        var contentString = '<h3>' + marker.title + '</h3>' + '<img src="' + marker.image + '" height=\"100px\" width=\"200px\">' + '<br>';
+        $.ajax({
+          url: marker.url,
+          dataType: "jsonp",
+          //jsonp : "callback",
+          success: function(response) {//response is a javascript object 
+            var articleList = response[1];
 
-  //ajax request
-  $.ajax({
-            url: wikiURL,
-            dataType: "jsonp"
-            //jsnop datatype
-        }).done(function(response) {
-             clearTimeout(wikiRequestTimeOut);
-            //response from wikipedia api
-            URL = response[3][0];
-            //getpanorama function is invoked
-
-            streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
-
+            for(var i = 0; i < articleList.length; i++) {
+              articleStr = articleList[i];
+              var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+              contentString = contentString + '<a href=\"' + url + '\">' + url + '</a>' + '<br>';
+            };
+            //clearTimeout(wikiRequestTimeout);
+          }
         });
 
-  if (infowindow.marker !=marker){
-  infowindow.marker = marker;
-  infowindow.setContent('<div>' + marker.title + '</div>');
- // infowindow.open(map , marker);
+        if (infowindow.marker != marker) {
+        infowindow.marker = marker;
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(function(){
+                marker.setAnimation(null);
+            }, 2000);
+            infowindow.setContent(contentString);
+        infowindow.open(map, marker);
+        // Make sure the marker property is cleared if the infowindow is closed.
+        infowindow.addListener('closeclick',function(){
+          infowindow.setMarker = null;
+              });
+          }
+      }
+      
+   
 
-  marker.addListener('closeclick',function(){
-  infowindow.setMarker(null);
-// infowindow.open(map ,marker);
 
-});
- var radius = 50;
-  
-    var getStreetView = function (data, status){
-    if (status == google.maps.StreetViewStatus.OK){
-     
-
-      var fenway = data.location.latLng;
-      var heading = google.maps.geometry.spherical.computeHeading(
-      fenway, marker.position);
-      infowindow.setContent('<div>' + marker.title + '</div><br><a href ="' + URL + '">' + URL + '</a><hr><div id="pano"></div>');
-      var panoramaOptions = {
-
-      position: fenway,
-      pov: {
-        heading: heading,
-         pitch: 10,
-
-        }
-        //panorama.setVisible(true);
-      };
-       
-       var panorama = new google.maps.StreetViewPanorama(
-       document.getElementById('pano'), panoramaOptions);
-       } else {
-        
-    infowindow.setContent('<div>' + marker.title + '</div>' +'<div>Street View data not found for this location</div>' );
-     }
-
-   //open infowindow on that marker
-    infowindow.open(map, marker);
-    };
-  }
- }
-
-      function toggleBounce() {
+   function toggleBounce() {
 
         for(i=0;i<markers.length;i++){
             markers[i].setAnimation(null);
@@ -214,9 +306,6 @@ function openInfoWindow() {
            */
         //}
       }
-
-
-
 
 }
 
