@@ -22,7 +22,7 @@ var map, infowwindow;
        {title:'Urth Cafe' ,location: {lat:24.705812,lng:46.705732}},
        {title:'KFC' ,location: {lat:24.746059,lng:46.619722}},
        {title:'Carter'  ,location: {lat:24.743673,lng:46.658264}},
-       {title:'Five Guys'  ,location: {lat:24.713786,lng:46.675296}}
+       {title:'Java Time'  ,location: {lat:24.713786,lng:46.675296}}
      ];
 
      var markers =[];
