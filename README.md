@@ -1,7 +1,7 @@
 # [Neighborbood Map Project](https://github.com/HananAlharbi/Neighborhood-Map)
 
 
-* This project is built using Google Maps API.
+* This project is built using Google Maps API, Foursquare API, and Knockout.js
 
 * Functionalty:  
   * A full-screen map to page using the Google Maps API.
