@@ -1,69 +1,90 @@
-
+<!DOCTYPE html>
 <html>
- <head>
- <!-- styles put here, but you can include a CSS file and reference it instead! -->
- <meta charset="utf-8">
-    <title>Neighborhood Map</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--include bootstarp framework-->
+<head>
+  <!-- styles put here, but you can include a CSS file and reference it instead! -->
+  <meta charset="utf-8">
+  <title>Neighborhood Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--include bootstarp framework-->
 
-    <!--include css file -->
-    <link rel="stylesheet" href="css/style.css">
+  <!--include css file -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+      <div>
+        <ul class="nav sidebar-nav locations-view" >
+          <li class="sidebar-brand" >
+            <a href="#">
+              Neighborhood Map
+            </a>
+          </li>
+
+          <li class="SearchBar">
+            <input id='keyword' type="text" data-bind="textInput: query" autocomplete="off" placeholder="Search">
+          </li>
+
+          <!-- <ul class="visibleList"> -->
+          <li class="locationsList" data-bind="foreach: filteredLocations">
+            <div class="location">
+              <a href="#" data-bind='text: title , attr: { "data-markid": $index }, click: $root.titleClicked'></a>
+            </div>
+          </li>
+          <!-- </ul> -->
+
+        </ul>
+      </div>
+    </nav>
+    <!-- /#sidebar-wrapper -->
 
 
- </head>
- <body>
-   <div id="wrapper">
+    <!-- Sidebar 1111111111111111111111 -->
+    <!-- <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+    <ul class="nav sidebar-nav locations-view" data-bind='foreach: filteredEmployees'>
+    <li class="sidebar-brand" >
+    <a href="#">
+    Neighborhood Map
+  </a>
+</li>
 
-
-       <!-- Sidebar -->
-       <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-           <div>
-<!--        <input id='keyword' type="text"  data-bind="textInput: query" autocomplete="off" placeholder="Search">-->
+<li class="SearchBar">
+<div class='beh'>
+<input id='keyword' type="text" data-bind="textInput: query" autocomplete="off" placeholder="Search">
+<a id='filter'>Filter</a>
 </div>
-           <div>
-           <ul class="nav sidebar-nav locations-view" >
-               <li class="sidebar-brand" >
-                   <a href="#">
-                      Neighborhood Map
-                      <input id='keyword' type="text"  data-bind="value: query" autocomplete="off" placeholder="Search">
+</li>
+</ul>
+</nav> -->
 
-                   </a>
-               </li>
-               <ul data-bind='foreach: filteredLocations'>
-                   <li class="location"><a href="#" data-bind='text: title , click: $root.titleClicked'></a></li>
-               </ul>
-            </ul>
-           
+
+
+
+
+
+
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+  <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+    <span class="hamb-top"></span>
+    <span class="hamb-middle"></span>
+    <span class="hamb-bottom"></span>
+  </button>
 </div>
-           
-       </nav>
-       <!-- /#sidebar-wrapper -->
+<!-- /#page-content-wrapper -->
 
-       <!-- Page Content -->
-       <div id="page-content-wrapper">
-           <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
-               <span class="hamb-top"></span>
-         <span class="hamb-middle"></span>
-       <span class="hamb-bottom"></span>
-           </button>
-
-       </div>
-       <!-- /#page-content-wrapper -->
-
-   </div>
-   <!-- /#wrapper -->
+</div>
+<!-- /#wrapper -->
 
 <div id='map'></div>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8TEl-S7oIufePwstuOnIToy3ZtRPYmAI&callback=initMap" onerror="googleError()" async defer></script>
 <script src="src/jquery.min.js"></script>
-
-
- <script src="src/knockout-3.3.0.js"></script>
+<script src="src/knockout-3.3.0.js"></script>
 <script type="text/javascript" src="src/script.js"></script>
 
-
-
- </body>
+</body>
 </html>
